@@ -1,0 +1,73 @@
+apiVersion: tekton.dev/v1beta1
+kind: Pipeline
+metadata:
+  name: coffeeshop-ui-pipeline
+  labels:
+    pipeline.openshift.io/runtime: nodejs
+    pipeline.openshift.io/runtime-version: 14-ubi8
+    pipeline.openshift.io/type: kubernetes
+spec:
+  params:
+    - name: APP_NAME
+      description: The app name
+      type: string
+    - name: GITHUB_REPO_URL
+      description: The github repo to find the application
+      type: string
+    - name: GITHUB_REPO_REVISION
+      description: The github branch to use
+      type: string
+    - name: IMAGE_NAME
+      description: The fully qualified image name.
+      type: string
+    - name: PATH_CONTEXT
+      default: .
+      type: string
+    - name: VERSION
+      default: 14-ubi8
+      type: string
+  tasks:
+    - name: clone-sources
+      taskRef:
+        name: git-clone
+        kind: ClusterTask
+      params:
+        - name: url
+          value: $(params.GITHUB_REPO_URL)
+        - name: revision
+          value: $(params.GITHUB_REPO_REVISION)
+        - name: deleteExisting
+          value: 'true'
+      workspaces:
+        - name: output
+          workspace: source
+    - name: build-app
+      taskRef:
+        kind: ClusterTask
+        name: s2i-nodejs
+      params:
+        - name: IMAGE
+          value: $(params.IMAGE_NAME)
+        - name: TLSVERIFY
+          value: 'false'
+        - name: PATH_CONTEXT
+          value: $(params.PATH_CONTEXT)
+        - name: VERSION
+          value: $(params.VERSION)
+      runAfter:
+        - clone-sources
+      workspaces:
+        - name: source
+          workspace: source
+    - name: deploy-app
+      taskRef:
+        kind: ClusterTask
+        name: openshift-client
+      params:
+        - name: SCRIPT
+          value: oc rollout status deploy/$(params.APP_NAME)
+      runAfter:
+        - build-app
+  workspaces:
+    - name: source
+      optional: false

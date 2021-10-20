@@ -1,0 +1,13 @@
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  labels:
+    app: coffeeshop-ui
+  name: coffeeshop-ui
+spec:
+  port:
+    targetPort: 8080
+  to:
+    kind: Service
+    name: coffeeshop-ui
+status: {}

@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: coffeeshop-ui
+    app.kubernetes.io/part-of: coffeeshop
+    app.openshift.io/runtime: nodejs
+  name: coffeeshop-ui
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: coffeeshop-ui
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: coffeeshop-ui
+    spec:
+      containers:
+        - name: coffeeshop-ui
+          image: PATCH_ME
+          envFrom:
+            - configMapRef:
+              name: coffeeshop-ui-config
+          resources: {}
+status: {}

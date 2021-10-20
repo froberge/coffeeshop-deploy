@@ -1,0 +1,21 @@
+apiVersion: tekton.dev/v1beta1
+kind: PipelineRun
+metadata:
+  generateName: coffeeshop-ui-deploy-
+spec:
+  pipelineRef:
+    name: coffeeshop-ui-pipeline
+  serviceAccountName: pipeline    
+  params:
+    - name: IMAGE_NAME
+      value: image-registry.openshift-image-registry.svc:5000/coffeeshop-dev/coffeeshop-ui
+    - name: APP_NAME
+      value: coffeeshop-ui
+    - name: GITHUB_REPO_URL
+      value: 'https://github.com/froberge/coffeeshop-ui.git'
+    - name: GITHUB_REPO_REVISION
+      value: product-page
+  workspaces:
+    - name: source
+      persistentVolumeClaim:
+        claimName: sources-pvc

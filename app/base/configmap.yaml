@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: coffeeshop-ui-config
+data:
+  PORT: '8080'
+  REACT_APP_PRODUCT_SERVICE: PATCH_ME

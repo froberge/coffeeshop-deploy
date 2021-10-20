@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: coffeeshop-ui
+  name: coffeeshop-ui
+spec:
+  ports:
+  - port: 8080
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    app: coffeeshop-ui
+status:
+  loadBalancer: {}
