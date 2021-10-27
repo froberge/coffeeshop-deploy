@@ -2,6 +2,7 @@ apiVersion: tekton.dev/v1beta1
 kind: Pipeline
 metadata:
   name: coffeeshop-ui-pipeline
+  namespace: coffeeshop-pipeline
   labels:
     pipeline.openshift.io/runtime: nodejs
     pipeline.openshift.io/runtime-version: 14-ubi8
