@@ -26,8 +26,8 @@ spec:
       containers:
         - name: coffeeshop
           image: PATCH_ME
-          envFrom:
-            - configMapRef:
-              name: coffeeshop-config
+          # envFrom:
+          #   - configMapRef:
+          #     name: coffeeshop-config
           resources: {}
 status: {}
