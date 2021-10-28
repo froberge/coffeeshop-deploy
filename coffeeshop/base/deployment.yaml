@@ -21,13 +21,13 @@ spec:
     metadata:
       labels:
         app: coffeeshop
-        deploymentconfig: coffeeshop
+        # deploymentconfig: coffeeshop
     spec:
       containers:
         - name: coffeeshop
           image: PATCH_ME
           envFrom:
             - configMapRef:
-              name: coffeeshop-ui-config
+              name: coffeeshop-config
           resources: {}
 status: {}
