@@ -8,7 +8,7 @@ spec:
   serviceAccountName: pipeline    
   params:
     - name: IMAGE_NAME
-      value: image-registry.openshift-image-registry.svc:5000/coffeeshop-dev/coffeeshop-ui
+      value: image-registry.openshift-image-registry.svc:5000/coffeeshop-pipeline/coffeeshop-ui
     - name: APP_NAME
       value: coffeeshop-ui
     - name: GITHUB_REPO_URL

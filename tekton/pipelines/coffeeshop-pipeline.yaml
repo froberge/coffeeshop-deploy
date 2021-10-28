@@ -5,7 +5,6 @@ metadata:
   labels:
     pipeline.openshift.io/runtime: nodejs
     pipeline.openshift.io/runtime-version: 14-ubi8
-    pipeline.openshift.io/type: kubernetes
 spec:
   params:
     - name: APP_NAME
