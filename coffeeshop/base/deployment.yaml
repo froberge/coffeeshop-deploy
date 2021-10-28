@@ -2,23 +2,29 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: coffeeshop-ui
+    app: coffeeshop
     app.kubernetes.io/part-of: coffeeshop
     app.openshift.io/runtime: nodejs
-  name: coffeeshop-ui
+  name: coffeeshop
 spec:
   replicas: 1
+  revisionHistoryLimit: 5
   selector:
     matchLabels:
-      app: coffeeshop-ui
-  strategy: {}
+      app: coffeeshop
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
   template:
     metadata:
       labels:
-        app: coffeeshop-ui
+        app: coffeeshop
+        deploymentconfig: coffeeshop
     spec:
       containers:
-        - name: coffeeshop-ui
+        - name: coffeeshop
           image: PATCH_ME
           envFrom:
             - configMapRef:
