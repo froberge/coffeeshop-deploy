@@ -58,14 +58,14 @@ spec:
       workspaces:
         - name: source
           workspace: source
-    - name: deploy-app
-      taskRef:
-        kind: ClusterTask
-        name: openshift-client
-      params:
-        - name: SCRIPT
-          value: oc rollout status deploy/$(params.APP_NAME)
-      runAfter:
-        - build-app
+    # - name: deploy-app
+    #   taskRef:
+    #     kind: ClusterTask
+    #     name: openshift-client
+    #   params:
+    #     - name: SCRIPT
+    #       value: oc rollout status deploy/$(params.APP_NAME)
+    #   runAfter:
+    #     - build-app
   workspaces:
     - name: source

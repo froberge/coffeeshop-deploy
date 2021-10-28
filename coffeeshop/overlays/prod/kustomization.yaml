@@ -3,12 +3,12 @@ kind: Kustomization
 namespace: coffeeshop-prod
 
 resources:
-  - ../../base/
+- ../../base/
 
-# patchesJson6902:
-# - path: deployment.yaml
-#   target:
-#     group: apps
-#     kind: Deployment
-#     version: v1
-#     name: coffeeshop-ui
+patchesJson6902:
+- path: deployment.yaml
+  target:
+    kind: Deployment
+    group: apps
+    name: coffeeshop
+    version: v1
