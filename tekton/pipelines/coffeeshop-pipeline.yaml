@@ -69,4 +69,3 @@ spec:
         - build-app
   workspaces:
     - name: source
-      optional: false
