@@ -1,0 +1,24 @@
+apiVersion: tekton.dev/v1beta1
+kind: PipelineRun
+metadata:
+  generateName: product-service-deploy-
+spec:
+  pipelineRef:
+    name: build-n-push-java-pipeline
+  serviceAccountName: pipeline    
+  params:
+    - name: IMAGE_NAME
+      value: image-registry.openshift-image-registry.svc:5000/coffeeshop-pipeline/product-service
+    - name: APP_NAME
+      value: product-service
+    - name: GITHUB_REPO_URL
+      value: https://github.com/froberge/product-service.git
+    - name: GITHUB_REPO_REVISION
+      value: working_code
+  workspaces:
+    - name: source
+      persistentVolumeClaim:
+        claimName: sources-pvc
+    - name: m2-repo
+      persistentVolumeClaim:
+        claimName: maven-repo-pvc
