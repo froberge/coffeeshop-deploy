@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   labels:
     app: coffeeshop
-    app.kubernetes.io/part-of: coffeeshop
+    app.kubernetes.io/part-of: frontend
     app.openshift.io/runtime: nodejs
   name: coffeeshop
 spec:

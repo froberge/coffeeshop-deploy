@@ -1,0 +1,26 @@
+apiVersion: serving.knative.dev/v1
+kind: Route
+metadata:
+  annotations:
+  name: product-service
+  ownerReferences:
+    - apiVersion: serving.knative.dev/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: Service
+      name: product-service
+  finalizers:
+    - routes.serving.knative.dev
+  labels:
+    app.kubernetes.io/component: product-service
+    app.kubernetes.io/instance: product-service
+    app.kubernetes.io/name: product-service
+    app.kubernetes.io/part-of: product-backend
+    app.openshift.io/runtime: quarkus
+    app.openshift.io/runtime-version: 0.0.1
+    serving.knative.dev/service: product-service
+spec:
+  traffic:
+    - configurationName: product-service
+      latestRevision: true
+      percent: 100

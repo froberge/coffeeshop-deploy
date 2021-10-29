@@ -4,7 +4,7 @@ metadata:
   labels:
     template: postgresql-ephemeral-template
     app: postgresql
-    app.kubernetes.io/part-of: coffeeshop
+    app.kubernetes.io/part-of: product-backend
   name: postgresql
 spec:
   replicas: 1
