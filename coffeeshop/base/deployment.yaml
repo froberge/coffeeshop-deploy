@@ -8,26 +8,33 @@ metadata:
   name: coffeeshop
 spec:
   replicas: 1
-  revisionHistoryLimit: 5
   selector:
     matchLabels:
       app: coffeeshop
-  strategy:
-    rollingUpdate:
-      maxSurge: 25%
-      maxUnavailable: 25%
-    type: RollingUpdate
   template:
     metadata:
       labels:
         app: coffeeshop
-        # deploymentconfig: coffeeshop
     spec:
       containers:
         - name: coffeeshop
           image: PATCH_ME
-          # envFrom:
-          #   - configMapRef:
-          #     name: coffeeshop-config
+          envFrom:
+            - configMapRef:
+              name: coffeeshop-config
           resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          imagePullPolicy: Always
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+      dnsPolicy: ClusterFirst
+      securityContext: {}
+      schedulerName: default-scheduler
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+  revisionHistoryLimit: 5
 status: {}
