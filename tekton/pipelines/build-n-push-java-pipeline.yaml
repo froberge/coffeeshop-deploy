@@ -37,28 +37,29 @@ spec:
       workspaces:
         - name: output
           workspace: source
-    - name: test-app
-      taskRef:
-        name: maven
-        kind: ClusterTask
-      runAfter:
-        - clone-sources
-      params:
-        - name: GOALS
-          value:
-            - 'clean'
-            - 'test'
-      workspaces:
-        - name: maven-settings
-          workspace: m2-repo
-        - name: source
-          workspace: source
+    # - name: test-app
+    #   taskRef:
+    #     name: maven
+    #     kind: ClusterTask
+    #   runAfter:
+    #     - clone-sources
+    #   params:
+    #     - name: GOALS
+    #       value:
+    #         - 'clean'
+    #         - 'test'
+    #   workspaces:
+    #     - name: maven-settings
+    #       workspace: m2-repo
+    #     - name: source
+    #       workspace: source
     - name: build-app
       taskRef:
         name: maven
         kind: ClusterTask
       runAfter:
-        - test-app
+        - clone-sources
+        # - test-app
       params:
         - name: GOALS
           value:
