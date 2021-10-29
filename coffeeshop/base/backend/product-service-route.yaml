@@ -1,7 +1,6 @@
 apiVersion: serving.knative.dev/v1
 kind: Route
 metadata:
-  annotations:
   name: product-service
   ownerReferences:
     - apiVersion: serving.knative.dev/v1
@@ -9,6 +8,7 @@ metadata:
       controller: true
       kind: Service
       name: product-service
+      uid: b7626185-8922-49a0-b303-9de4af196fd2
   finalizers:
     - routes.serving.knative.dev
   labels:
