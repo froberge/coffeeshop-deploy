@@ -4,4 +4,6 @@ namespace: coffeeshop-pipeline
 
 resources:
   - workspaces/source-pvc.yaml
+  - workspaces/maven-repo-pvc.yaml
   - pipelines/coffeeshop-pipeline.yaml
+  - pipelines/build-n-push-java-pipeline.yaml
