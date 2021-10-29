@@ -74,12 +74,13 @@ spec:
         volumeMounts:
         - name: postgresql-data
           mountPath: /var/lib/pgsql/data
-        dnsPolicy: ClusterFirst
-        restartPolicy: Always
-        terminationGracePeriodSeconds: 30
-        volumes:
-          - name: postgresql-data
-            emptyDir: {}
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      terminationGracePeriodSeconds: 30
+      volumes:
+        - name: postgresql-data
+          emptyDir: {}
   test: false
   triggers:
   - imageChangeParams:
