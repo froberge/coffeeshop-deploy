@@ -27,7 +27,7 @@ spec:
       containerConcurrency: 0
       containers:
         - image: >-
-            image-registry.openshift-image-registry.svc:5000/cofeeshop-pipeline/product-service
+            image-registry.openshift-image-registry.svc:5000/coffeeshop-pipeline/product-service
           imagePullPolicy: Always
           name: product-service
           ports:
