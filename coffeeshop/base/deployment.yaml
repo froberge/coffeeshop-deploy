@@ -21,7 +21,7 @@ spec:
           image: PATCH_ME
           envFrom:
             - configMapRef:
-              name: coffeeshop-config
+                name: coffeeshop-config
           resources: {}
           terminationMessagePath: /dev/termination-log
           terminationMessagePolicy: File
