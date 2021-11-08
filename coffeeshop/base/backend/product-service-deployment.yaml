@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
         - name: product-service
-          image: PATCH_ME
+          image: image-registry.openshift-image-registry.svc:5000/coffeeshop-pipeline/product-service
           envFrom:
             - configMapRef:
                 name: product-service-config
