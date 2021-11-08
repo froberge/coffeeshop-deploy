@@ -10,5 +10,5 @@ spec:
     targetPort: 8080
   to:
     kind: Service
-    name: coffeeshop
+    name: product-service
 status: {}
