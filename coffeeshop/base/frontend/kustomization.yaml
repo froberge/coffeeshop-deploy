@@ -4,5 +4,5 @@ kind: Kustomization
 resources:
   - ui-configmap.yaml
   - ui-deployment.yaml
-  - ui-service.yaml
+  - ui-svc.yaml
   - ui-route.yaml

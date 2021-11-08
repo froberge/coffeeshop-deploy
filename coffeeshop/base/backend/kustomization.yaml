@@ -2,7 +2,8 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
 resources:
-  - internal-postgresdb-secret.yaml
+  - postgresdb-secret.yaml
   - product-service-config.yaml
-  - product-service-service.yaml
+  - product-service-deployment.yaml
+  - product-service-svc.yaml
   - product-service-route.yaml

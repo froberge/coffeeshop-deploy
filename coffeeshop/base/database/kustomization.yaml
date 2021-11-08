@@ -4,4 +4,4 @@ kind: Kustomization
 resources:
   - db-secret.yaml
   - db-deploymentconfig.yaml
-  - db-service.yaml
+  - db-svc.yaml
