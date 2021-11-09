@@ -24,8 +24,8 @@ spec:
           envFrom:
             - configMapRef:
                 name: product-service-config
-            # - secretKeyRef:
-            #     name: postgresdb-secret
+            - secretKeyRef:
+                name: postgresdb-secret
           resources: {}
           terminationMessagePath: /dev/termination-log
           terminationMessagePolicy: File
