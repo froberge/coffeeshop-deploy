@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   annotations:
-    app.openshift.io/connects-to: [{"apiVersion":"apps.openshift.io/v1","kind":"DeploymentConfig","name":"postgresql"}]
+    app.openshift.io/connects-to: '[{"apiVersion":"apps.openshift.io/v1","kind":"DeploymentConfig","name":"postgresql"}]'
   labels:
     app: product-service
     app.kubernetes.io/part-of: product-backend
