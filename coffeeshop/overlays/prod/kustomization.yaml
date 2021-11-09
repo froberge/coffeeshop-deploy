@@ -6,7 +6,7 @@ resources:
 - ../../base/
 
 patchesJson6902:
-- path: deployment.yaml
+- path: deployment-frontend.yaml
   target:
     kind: Deployment
     group: apps

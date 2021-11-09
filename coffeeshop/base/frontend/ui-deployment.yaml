@@ -1,12 +1,12 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
+  annotations:
+    app.openshift.io/connects-to: '[{"apiVersion":"apps.openshift.io/v1","kind":"Deployment","name":"product-service"}]'
   labels:
     app: coffeeshop
     app.kubernetes.io/part-of: frontend
     app.openshift.io/runtime: nodejs
-  annotations:
-    app.openshift.io/connects-to: 'product-service'
   name: coffeeshop
 spec:
   replicas: 1
