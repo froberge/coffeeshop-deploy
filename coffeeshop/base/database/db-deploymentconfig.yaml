@@ -5,6 +5,7 @@ metadata:
     template: postgresql-ephemeral-template
     app: postgresql
     app.kubernetes.io/part-of: product-backend
+    app.openshift.io/runtime: postgresql
   name: postgresql
 spec:
   replicas: 1

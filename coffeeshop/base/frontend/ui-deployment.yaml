@@ -6,7 +6,7 @@ metadata:
     app.kubernetes.io/part-of: frontend
     app.openshift.io/runtime: nodejs
   annotations:
-    app.openshift.io/connects-to: product-service
+    app.openshift.io/connects-to: 'product-service'
   name: coffeeshop
 spec:
   replicas: 1
