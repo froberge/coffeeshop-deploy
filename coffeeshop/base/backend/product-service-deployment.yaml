@@ -4,6 +4,7 @@ metadata:
   labels:
     app: product-service
     app.kubernetes.io/part-of: product-backend
+  annotations:
     app.openshift.io/runtime: quarkus
   name: product-service
 spec:
