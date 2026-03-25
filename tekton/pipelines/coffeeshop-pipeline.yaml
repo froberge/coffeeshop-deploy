@@ -4,7 +4,7 @@ metadata:
   name: coffeeshop-ui-pipeline
   labels:
     pipeline.openshift.io/runtime: nodejs
-    pipeline.openshift.io/runtime-version: 18-ubi8
+    pipeline.openshift.io/runtime-version: 16-ubi8
 spec:
   params:
     - name: APP_NAME
@@ -23,7 +23,7 @@ spec:
       default: .
       type: string
     - name: VERSION
-      default: 18-ubi8
+      default: 16-ubi8
       type: string
   tasks:
     - name: clone-sources
