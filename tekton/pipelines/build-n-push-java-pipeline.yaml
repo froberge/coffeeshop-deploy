@@ -115,7 +115,7 @@ spec:
             - 'clean'
             - 'package'
       workspaces:
-        - name: maven-settings
+        - name: maven-local-repo
           workspace: m2-repo
         - name: source
           workspace: source
