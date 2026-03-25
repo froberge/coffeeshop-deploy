@@ -26,7 +26,26 @@ spec:
       default: 16-ubi8
       type: string
   tasks:
+    - name: init-workspace
+      taskSpec:
+        workspaces:
+          - name: output
+        stepTemplate:
+          securityContext:
+            runAsUser: 0
+        steps:
+          - name: fix-permissions
+            image: registry.access.redhat.com/ubi8/ubi-minimal:latest
+            script: |
+              #!/bin/sh
+              chmod 777 $(workspaces.output.path)
+              echo "Workspace permissions set to 777 at $(workspaces.output.path)"
+      workspaces:
+        - name: output
+          workspace: source
     - name: clone-sources
+      runAfter:
+        - init-workspace
       taskRef:
         resolver: cluster
         params:
