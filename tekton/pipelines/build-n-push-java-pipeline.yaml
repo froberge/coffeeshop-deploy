@@ -22,11 +22,10 @@ spec:
     - name: source
     - name: m2-repo
   tasks:
-    - name: init-workspace
+    - name: init-source-workspace
       taskSpec:
         workspaces:
           - name: source
-          - name: m2-repo
         stepTemplate:
           securityContext:
             runAsUser: 0
@@ -36,16 +35,30 @@ spec:
             script: |
               #!/bin/sh
               chmod 777 $(workspaces.source.path)
-              chmod 777 $(workspaces.m2-repo.path)
-              echo "Workspace permissions set to 777"
+              echo "source workspace permissions set to 777"
       workspaces:
         - name: source
           workspace: source
+    - name: init-m2-workspace
+      taskSpec:
+        workspaces:
+          - name: m2-repo
+        stepTemplate:
+          securityContext:
+            runAsUser: 0
+        steps:
+          - name: fix-permissions
+            image: registry.access.redhat.com/ubi8/ubi-minimal:latest
+            script: |
+              #!/bin/sh
+              chmod 777 $(workspaces.m2-repo.path)
+              echo "m2-repo workspace permissions set to 777"
+      workspaces:
         - name: m2-repo
           workspace: m2-repo
     - name: clone-sources
       runAfter:
-        - init-workspace
+        - init-source-workspace
       taskRef:
         resolver: cluster
         params:
@@ -94,7 +107,7 @@ spec:
             value: openshift-pipelines
       runAfter:
         - clone-sources
-        # - test-app
+        - init-m2-workspace
       params:
         - name: GOALS
           value:

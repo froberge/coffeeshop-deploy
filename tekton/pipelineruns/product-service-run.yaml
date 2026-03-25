@@ -11,7 +11,11 @@ spec:
       - name: BUILDAH_ISOLATION
         value: chroot
   taskRunSpecs:
-    - pipelineTaskName: init-workspace
+    - pipelineTaskName: init-source-workspace
+      taskPodTemplate:
+        securityContext:
+          runAsUser: 0
+    - pipelineTaskName: init-m2-workspace
       taskPodTemplate:
         securityContext:
           runAsUser: 0
