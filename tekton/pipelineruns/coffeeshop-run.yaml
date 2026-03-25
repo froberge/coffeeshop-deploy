@@ -5,7 +5,13 @@ metadata:
 spec:
   pipelineRef:
     name: coffeeshop-ui-pipeline
-  serviceAccountName: pipeline    
+  serviceAccountName: pipeline
+  podTemplate:
+    securityContext:
+      runAsUser: 0
+    env:
+      - name: BUILDAH_ISOLATION
+        value: chroot
   params:
     - name: IMAGE_NAME
       value: image-registry.openshift-image-registry.svc:5000/coffeeshop-pipeline/coffeeshop
