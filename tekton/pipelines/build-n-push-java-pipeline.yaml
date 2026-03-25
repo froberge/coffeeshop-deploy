@@ -26,6 +26,7 @@ spec:
       taskRef:
         name: git-clone
         kind: ClusterTask
+        apiVersion: tekton.dev/v1beta1
       params:
         - name: url
           value: $(params.GITHUB_REPO_URL)
@@ -57,6 +58,7 @@ spec:
       taskRef:
         name: maven
         kind: ClusterTask
+        apiVersion: tekton.dev/v1beta1
       runAfter:
         - clone-sources
         # - test-app
@@ -75,6 +77,7 @@ spec:
       taskRef:
         name: buildah
         kind: ClusterTask
+        apiVersion: tekton.dev/v1beta1
       runAfter:
         - build-app
       params:

@@ -30,6 +30,7 @@ spec:
       taskRef:
         name: git-clone
         kind: ClusterTask
+        apiVersion: tekton.dev/v1beta1
       params:
         - name: url
           value: $(params.GITHUB_REPO_URL)
@@ -44,6 +45,7 @@ spec:
       taskRef:
         kind: ClusterTask
         name: s2i-nodejs
+        apiVersion: tekton.dev/v1beta1
       params:
         - name: IMAGE
           value: $(params.IMAGE_NAME)
