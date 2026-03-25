@@ -5,7 +5,16 @@ metadata:
 spec:
   pipelineRef:
     name: build-n-push-java-pipeline
-  serviceAccountName: pipeline    
+  serviceAccountName: pipeline
+  podTemplate:
+    env:
+      - name: BUILDAH_ISOLATION
+        value: chroot
+  taskRunSpecs:
+    - pipelineTaskName: init-workspace
+      taskPodTemplate:
+        securityContext:
+          runAsUser: 0
   params:
     - name: IMAGE_NAME
       value: image-registry.openshift-image-registry.svc:5000/coffeeshop-pipeline/product-service

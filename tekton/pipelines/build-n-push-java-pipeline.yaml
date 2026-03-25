@@ -22,7 +22,30 @@ spec:
     - name: source
     - name: m2-repo
   tasks:
+    - name: init-workspace
+      taskSpec:
+        workspaces:
+          - name: source
+          - name: m2-repo
+        stepTemplate:
+          securityContext:
+            runAsUser: 0
+        steps:
+          - name: fix-permissions
+            image: registry.access.redhat.com/ubi8/ubi-minimal:latest
+            script: |
+              #!/bin/sh
+              chmod 777 $(workspaces.source.path)
+              chmod 777 $(workspaces.m2-repo.path)
+              echo "Workspace permissions set to 777"
+      workspaces:
+        - name: source
+          workspace: source
+        - name: m2-repo
+          workspace: m2-repo
     - name: clone-sources
+      runAfter:
+        - init-workspace
       taskRef:
         resolver: cluster
         params:
@@ -98,9 +121,12 @@ spec:
       params:
         - name: IMAGE
           value: '$(params.IMAGE_NAME)'
-        # since pushing to internal registry we skip TLS verify
         - name: TLSVERIFY
           value: 'false'
+        - name: STORAGE_DRIVER
+          value: vfs
+        - name: BUILD_EXTRA_ARGS
+          value: '--isolation=chroot --security-opt=unmask=/proc/*'
       workspaces:
         - name: source
           workspace: source
