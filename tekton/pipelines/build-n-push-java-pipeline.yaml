@@ -20,7 +20,6 @@ spec:
       default: main
   workspaces:
     - name: source
-    - name: m2-repo
   tasks:
     - name: init-source-workspace
       taskSpec:
@@ -39,23 +38,6 @@ spec:
       workspaces:
         - name: source
           workspace: source
-    - name: init-m2-workspace
-      taskSpec:
-        workspaces:
-          - name: m2-repo
-        stepTemplate:
-          securityContext:
-            runAsUser: 0
-        steps:
-          - name: fix-permissions
-            image: registry.access.redhat.com/ubi8/ubi-minimal:latest
-            script: |
-              #!/bin/sh
-              chmod 777 $(workspaces.m2-repo.path)
-              echo "m2-repo workspace permissions set to 777"
-      workspaces:
-        - name: m2-repo
-          workspace: m2-repo
     - name: clone-sources
       runAfter:
         - init-source-workspace
@@ -79,22 +61,6 @@ spec:
       workspaces:
         - name: output
           workspace: source
-    # - name: test-app
-    #   taskRef:
-    #     name: maven
-    #     kind: ClusterTask
-    #   runAfter:
-    #     - clone-sources
-    #   params:
-    #     - name: GOALS
-    #       value:
-    #         - 'clean'
-    #         - 'test'
-    #   workspaces:
-    #     - name: maven-settings
-    #       workspace: m2-repo
-    #     - name: source
-    #       workspace: source
     - name: build-app
       taskRef:
         resolver: cluster
@@ -107,7 +73,6 @@ spec:
             value: openshift-pipelines
       runAfter:
         - clone-sources
-        - init-m2-workspace
       params:
         - name: GOALS
           value:
@@ -115,8 +80,6 @@ spec:
             - 'clean'
             - 'package'
       workspaces:
-        - name: maven-local-repo
-          workspace: m2-repo
         - name: source
           workspace: source
     - name: build-image

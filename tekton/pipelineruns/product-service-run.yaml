@@ -15,10 +15,6 @@ spec:
       taskPodTemplate:
         securityContext:
           runAsUser: 0
-    - pipelineTaskName: init-m2-workspace
-      taskPodTemplate:
-        securityContext:
-          runAsUser: 0
   params:
     - name: IMAGE_NAME
       value: image-registry.openshift-image-registry.svc:5000/coffeeshop-pipeline/product-service
@@ -32,6 +28,3 @@ spec:
     - name: source
       persistentVolumeClaim:
         claimName: sources-pvc
-    - name: m2-repo
-      persistentVolumeClaim:
-        claimName: maven-repo-pvc
