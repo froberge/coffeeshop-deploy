@@ -7,11 +7,18 @@ spec:
     name: coffeeshop-ui-pipeline
   serviceAccountName: pipeline
   podTemplate:
-    securityContext:
-      fsGroup: 65532
     env:
       - name: BUILDAH_ISOLATION
         value: chroot
+  taskRunSpecs:
+    - pipelineTaskName: clone-sources
+      taskPodTemplate:
+        securityContext:
+          runAsUser: 0
+    - pipelineTaskName: build-app
+      taskPodTemplate:
+        securityContext:
+          runAsUser: 0
   params:
     - name: IMAGE_NAME
       value: image-registry.openshift-image-registry.svc:5000/coffeeshop-pipeline/coffeeshop
