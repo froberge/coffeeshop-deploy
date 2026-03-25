@@ -14,7 +14,7 @@ spec:
     - name: GITHUB_REPO_URL
       value: 'https://github.com/froberge/coffeeshop-ui.git'
     - name: GITHUB_REPO_REVISION
-      value: product-page
+      value: main
   workspaces:
     - name: source
       persistentVolumeClaim:
