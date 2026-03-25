@@ -87,7 +87,7 @@ spec:
         - name: STORAGE_DRIVER
           value: vfs
         - name: BUILD_EXTRA_ARGS
-          value: --isolation=chroot
+          value: '--isolation=chroot --security-opt=unmask=/proc/*'
       runAfter:
         - clone-sources
       workspaces:
