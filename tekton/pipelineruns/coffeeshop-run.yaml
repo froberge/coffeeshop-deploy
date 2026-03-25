@@ -7,8 +7,6 @@ spec:
     name: coffeeshop-ui-pipeline
   serviceAccountName: pipeline
   podTemplate:
-    securityContext:
-      runAsUser: 0
     env:
       - name: BUILDAH_ISOLATION
         value: chroot
