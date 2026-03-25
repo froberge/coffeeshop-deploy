@@ -37,11 +37,11 @@ spec:
           - name: namespace
             value: openshift-pipelines
       params:
-        - name: url
+        - name: URL
           value: $(params.GITHUB_REPO_URL)
-        - name: revision
+        - name: REVISION
           value: $(params.GITHUB_REPO_REVISION)
-        - name: deleteExisting
+        - name: DELETE_EXISTING
           value: 'true'
       workspaces:
         - name: output
