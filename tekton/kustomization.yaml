@@ -7,3 +7,4 @@ resources:
   - workspaces/maven-repo-pvc.yaml
   - pipelines/coffeeshop-pipeline.yaml
   - pipelines/build-n-push-java-pipeline.yaml
+  - rbac/pipeline-scc-rolebinding.yaml
