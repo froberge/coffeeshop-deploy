@@ -24,9 +24,14 @@ spec:
   tasks:
     - name: clone-sources
       taskRef:
-        name: git-clone
-        kind: ClusterTask
-        apiVersion: tekton.dev/v1beta1
+        resolver: cluster
+        params:
+          - name: kind
+            value: task
+          - name: name
+            value: git-clone
+          - name: namespace
+            value: openshift-pipelines
       params:
         - name: url
           value: $(params.GITHUB_REPO_URL)
@@ -56,9 +61,14 @@ spec:
     #       workspace: source
     - name: build-app
       taskRef:
-        name: maven
-        kind: ClusterTask
-        apiVersion: tekton.dev/v1beta1
+        resolver: cluster
+        params:
+          - name: kind
+            value: task
+          - name: name
+            value: maven
+          - name: namespace
+            value: openshift-pipelines
       runAfter:
         - clone-sources
         # - test-app
@@ -75,9 +85,14 @@ spec:
           workspace: source
     - name: build-image
       taskRef:
-        name: buildah
-        kind: ClusterTask
-        apiVersion: tekton.dev/v1beta1
+        resolver: cluster
+        params:
+          - name: kind
+            value: task
+          - name: name
+            value: buildah
+          - name: namespace
+            value: openshift-pipelines
       runAfter:
         - build-app
       params:
