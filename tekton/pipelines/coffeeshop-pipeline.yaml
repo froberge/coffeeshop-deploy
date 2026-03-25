@@ -65,6 +65,8 @@ spec:
           value: $(params.PATH_CONTEXT)
         - name: VERSION
           value: $(params.VERSION)
+        - name: STORAGE_DRIVER
+          value: vfs
       runAfter:
         - clone-sources
       workspaces:
