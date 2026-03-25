@@ -4,4 +4,4 @@ metadata:
   name: coffeeshop-config
 data:
   PORT: '8080'
-  REACT_APP_PRODUCT_SERVICE: 'http://product-service-coffeeshop-dev.apps.cluster-kgv87.kgv87.sandbox55.opentlc.com/product'
+  REACT_APP_PRODUCT_SERVICE: 'http://product-service-coffeeshop-dev.apps.coffeeshop.sandbox5342.opentlc.com/product'
